@@ -1,0 +1,271 @@
+{
+  "generated_by": "engine/run.py --emit-web-constants",
+  "constants": {
+    "R": 8.314,
+    "M_H2": 2.016,
+    "T_BENCH": 77.0,
+    "T_PROD": 195.0,
+    "PRESSURES": [
+      1.0,
+      3.0,
+      5.0,
+      7.0,
+      10.0
+    ]
+  },
+  "fits": {
+    "sips": {
+      "13X": {
+        "zeolite": "13X",
+        "model": "sips",
+        "params": {
+          "n_sat": 2.316252488161866,
+          "b": 0.1816963234047095,
+          "m": 0.7947952630395337
+        },
+        "residuals_pct": [
+          -1.087,
+          1.626,
+          -0.538,
+          -0.901,
+          0.558
+        ],
+        "max_abs_error_pct": 1.6255225910830924,
+        "rmse_pct": 1.0231830035557887
+      },
+      "5A": {
+        "zeolite": "5A",
+        "model": "sips",
+        "params": {
+          "n_sat": 1.5315335767154212,
+          "b": 0.1830499814788588,
+          "m": 0.7910851910666403
+        },
+        "residuals_pct": [
+          -0.941,
+          1.301,
+          -0.141,
+          -1.104,
+          0.583
+        ],
+        "max_abs_error_pct": 1.30071323959742,
+        "rmse_pct": 0.9116494222747388
+      }
+    },
+    "langmuir": {
+      "13X": {
+        "zeolite": "13X",
+        "model": "langmuir",
+        "params": {
+          "n_sat": 1.8593747677003016,
+          "b": 0.3117835758353532
+        },
+        "residuals_pct": [
+          -7.93,
+          3.291,
+          1.138,
+          -0.381,
+          -0.857
+        ],
+        "max_abs_error_pct": 7.930297381172786,
+        "rmse_pct": 3.8960361224896287
+      },
+      "5A": {
+        "zeolite": "5A",
+        "model": "langmuir",
+        "params": {
+          "n_sat": 1.2259559876218455,
+          "b": 0.3168864272439291
+        },
+        "residuals_pct": [
+          -7.811,
+          3.013,
+          1.567,
+          -0.587,
+          -0.864
+        ],
+        "max_abs_error_pct": 7.810763698306005,
+        "rmse_pct": 3.8374173308249007
+      }
+    }
+  },
+  "models": {
+    "sips": {
+      "label": "Sips (Langmuir-Freundlich)",
+      "params": [
+        "n_sat",
+        "b",
+        "m"
+      ],
+      "note": "3-parameter. Fits the Langmi benchmark to within ~1.6%, leaving the +/-15% tolerance for physics rather than fit error. Default."
+    },
+    "langmuir": {
+      "label": "Langmuir",
+      "params": [
+        "n_sat",
+        "b"
+      ],
+      "note": "2-parameter, referenced directly by the specification. Fits the benchmark to ~8%, consuming half the +/-15% validation budget."
+    }
+  },
+  "materials": {
+    "13X": {
+      "key": "13X",
+      "label": "Zeolite 13X",
+      "framework": "FAU (Faujasite)",
+      "bet_area": 800.0,
+      "micropore_volume": 0.3,
+      "crystal_density": 1.92,
+      "bulk_density": 0.6,
+      "binder_fraction": 0.175,
+      "q_st_range": [
+        4.0,
+        8.0
+      ],
+      "q_st_default": 4.0
+    },
+    "5A": {
+      "key": "5A",
+      "label": "Zeolite 5A",
+      "framework": "LTA (Linde Type A)",
+      "bet_area": 680.0,
+      "micropore_volume": 0.25,
+      "crystal_density": 1.52,
+      "bulk_density": 0.7,
+      "binder_fraction": 0.175,
+      "q_st_range": [
+        4.0,
+        7.0
+      ],
+      "q_st_default": 4.0
+    }
+  },
+  "nano_ac": {
+    "label": "Nano-Activated Carbon",
+    "bet_area": 1000.0,
+    "micropore_volume": 0.4,
+    "true_density": 2.1,
+    "q_st_default": 6.0,
+    "area_scaling_from": "13X",
+    "estimated": true
+  },
+  "configs": [
+    {
+      "run": 1,
+      "zeolite": "13X",
+      "form": "granular",
+      "composite": false,
+      "priority": "HIGH",
+      "label": "13X Granular (plain)"
+    },
+    {
+      "run": 2,
+      "zeolite": "13X",
+      "form": "powder",
+      "composite": false,
+      "priority": "HIGH",
+      "label": "13X Powder (plain)"
+    },
+    {
+      "run": 3,
+      "zeolite": "5A",
+      "form": "granular",
+      "composite": false,
+      "priority": "MEDIUM",
+      "label": "5A Granular (plain)"
+    },
+    {
+      "run": 4,
+      "zeolite": "5A",
+      "form": "powder",
+      "composite": false,
+      "priority": "MEDIUM",
+      "label": "5A Powder (plain)"
+    },
+    {
+      "run": 5,
+      "zeolite": "13X",
+      "form": "granular",
+      "composite": true,
+      "priority": "HIGH",
+      "label": "13X Granular + Nano-AC"
+    },
+    {
+      "run": 6,
+      "zeolite": "13X",
+      "form": "powder",
+      "composite": true,
+      "priority": "HIGH",
+      "label": "13X Powder + Nano-AC"
+    },
+    {
+      "run": 7,
+      "zeolite": "5A",
+      "form": "granular",
+      "composite": true,
+      "priority": "MEDIUM",
+      "label": "5A Granular + Nano-AC"
+    },
+    {
+      "run": 8,
+      "zeolite": "5A",
+      "form": "powder",
+      "composite": true,
+      "priority": "MEDIUM",
+      "label": "5A Powder + Nano-AC"
+    }
+  ],
+  "factors": {
+    "powder": 1.15,
+    "composite": 1.4,
+    "zeolite_fraction": 0.85,
+    "nano_ac_fraction": 0.15,
+    "bed_loading_g": 90.0
+  },
+  "benchmark": {
+    "source": "Langmi et al. (2003) J. Alloys Compd. 356-357, 710-715",
+    "tolerance": 0.15,
+    "data": {
+      "13X": [
+        0.48,
+        0.87,
+        1.12,
+        1.28,
+        1.42
+      ],
+      "5A": [
+        0.32,
+        0.58,
+        0.74,
+        0.85,
+        0.94
+      ]
+    }
+  },
+  "vessel": {
+    "total_cm3": 490.8738521234052,
+    "dead_per_end_cm3": 58.90486225480862,
+    "dead_total_cm3": 117.80972450961724,
+    "active_bed_cm3": 373.06412761378795,
+    "spec_stated_total_cm3": 484.0,
+    "spec_stated_active_cm3": 364.0,
+    "void_fraction": 0.38
+  },
+  "notes": {
+    "excess_vs_absolute": "Langmi's values are EXCESS adsorption; a GCMC run reports ABSOLUTE adsorption. At 77 K / 10 bar the gap is ~0.09 wt% (~6% of the benchmark), always in the same direction. Subtract rho_bulk x V_pore from GCMC output before comparing."
+  },
+  "defaults": {
+    "q_st": 6.0,
+    "temperature": 195.0,
+    "pressures": [
+      1.0,
+      3.0,
+      5.0,
+      7.0,
+      10.0
+    ],
+    "isotherm_model": "sips",
+    "basis": "literature",
+    "composite_approach": "B"
+  }
+}
