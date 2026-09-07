@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>H₂ Adsorption Storage Simulator</title>
+<script>
+// Dev assets are regenerated/edited constantly and browsers cache them aggressively.
+// One shared cache-busting token for every locally-authored asset.
+window.__CB = Date.now();
+document.write('<link rel="stylesheet" href="styles.css?t=' + window.__CB + '">');
+</script>
+<script type="importmap">
+{"imports":{
+  "three":"./vendor/three.module.min.js",
+  "three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"
+}}
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">
+    <div class="mark">H₂</div>
+    <div><b>H₂ Adsorption Storage Simulator</b>
+      <span>Zeolite–Nano-AC composite physisorption</span></div>
+  </div>
+  <nav class="steps" id="steps"></nav>
+  <button class="icon-btn" id="themeBtn" title="Toggle theme">☾</button>
+</header>
+
+<div class="shell">
+
+  <aside class="rail-left">
+    <div class="card"><h3>Simulation parameters</h3><div class="body">
+
+      <div class="field">
+        <label for="qst">Isosteric heat q<sub>st</sub> — <span id="qstVal">6.0</span> kJ/mol</label>
+        <input type="range" id="qst" min="4" max="8" step="0.1" value="6"/>
+        <div class="hint">Spec range 4–8 kJ/mol. This single parameter moves the answer
+          by more than an order of magnitude — set it deliberately.</div>
+      </div>
+
+      <div class="field">
+        <label for="temp">Temperature (K)</label>
+        <input type="number" id="temp" value="195" min="60" max="300" step="1"/>
+        <div class="hint">195 K is the dry-ice/acetone bath. Fixed by the specification.</div>
+      </div>
+
+      <div class="field">
+        <label for="pmax">Maximum pressure (bar)</label>
+        <select id="pmax">
+          <option value="10" selected>1, 3, 5, 7, 10 bar (full series)</option>
+          <option value="7">1, 3, 5, 7 bar</option>
+          <option value="5">1, 3, 5 bar</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Reporting units</label>
+        <div class="seg" id="unitSeg">
+          <button data-unit="mg_per_g" class="on">mg/g</button>
+          <button data-unit="wt_pct">wt%</button>
+        </div>
+        <div class="hint">mg/g keeps the numbers readable at 195 K; wt% matches
+          the specification's reporting convention.</div>
+      </div>
+
+      <div class="field">
+        <label for="model">Isotherm model</label>
+        <select id="model">
+          <option value="sips" selected>Sips (Langmuir–Freundlich)</option>
+          <option value="langmuir">Langmuir</option>
+        </select>
+        <div class="hint">Sips fits the benchmark to ~1.6%; Langmuir to ~8%,
+          consuming half the ±15% validation budget.</div>
+      </div>
+
+      <div class="field">
+        <label for="basis">Baseline basis</label>
+        <select id="basis">
+          <option value="literature" selected>Literature (binder-inclusive)</option>
+          <option value="pure_framework">Pure framework (×0.825 granular)</option>
+        </select>
+        <div class="hint">Section 4.1 mandates ×0.825 for granular runs, but Table 11.1
+          was built without it. Applying both double-counts the binder.</div>
+      </div>
+
+      <div class="field">
+        <label for="approach">Composite method</label>
+        <select id="approach">
+          <option value="B" selected>Approach B — ×1.40 on zeolite</option>
+          <option value="A">Approach A — weighted mix, then ×1.40</option>
+        </select>
+        <div class="hint">Approach A applies Hauli's factor on top of a mixture that
+          already contains the carbon, double-counting the enhancement.</div>
+      </div>
+
+      <button class="btn ghost" id="resetBtn">Reset to spec defaults</button>
+    </div></div>
+  </aside>
+
+  <main id="main"></main>
+
+  <aside class="rail-right" id="rail-right"></aside>
+</div>
+
+<script>
+// Loaded via document.write so they stay synchronous and correctly ordered, while the
+// cache-busting token guarantees an engine re-run or a code edit is picked up on reload.
+["model-constants.js", "physics.js", "app.js"].forEach(f =>
+  document.write('<scr' + 'ipt src="' + f + '?t=' + window.__CB + '"></scr' + 'ipt>'));
+</script>
+<script type="module">
+  // The 3D view is an ES module; hand it to the app once loaded. Requires http(s) --
+  // module imports are blocked on file://, so run the local server for this screen.
+  const { createVesselView } = await import("./vessel3d.js?t=" + window.__CB);
+  window.__createVesselView = createVesselView;
+  window.dispatchEvent(new Event("vessel3d-ready"));
+</script>
+</body>
+</html>
