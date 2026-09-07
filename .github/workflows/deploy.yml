@@ -1,8 +1,10 @@
+# Manual-only. The live site is currently served from the gh-pages branch (see README),
+# because GitHub Actions cannot run while the account has a billing hold. Once that is
+# cleared, run this workflow once and switch Pages back to "GitHub Actions" as the source
+# to get automatic deploys on every push to main.
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
