@@ -1,10 +1,8 @@
 # H₂ Adsorption Storage Simulator
 
 Simulation tool for a prototype zeolite–nano-activated-carbon physisorption hydrogen
-storage system (drawing PID-ZHS-FAB-002, Rev C1).
-
-> The source specification document is unpublished academic material and is not included
-> in this repository. Every parameter the engine needs is encoded in `engine/model.py`.
+storage system, built against `Simulation_Specification.docx` (drawing PID-ZHS-FAB-002,
+Rev C1).
 
 Two halves, one physics core:
 
@@ -123,8 +121,19 @@ engine/run.py            CLI
 engine/parity_check.py   sweeps 96 option combinations, diffs Python against JavaScript
 web/physics.js           same physics, shared by browser and parity test
 web/model-constants.js   fitted parameters, generated — do not edit by hand
-out/                     generated deliverables
+out/                     generated deliverables (committed)
 ```
+
+## Repository contents
+
+| Path | What it is |
+|------|-----------|
+| `Simulation_Specification.docx` | The source specification this tool implements |
+| `out/` | Generated deliverables: master isotherm table (.xlsx/.docx), validation table, methodology note, 300 dpi figures, raw JSON |
+| `engine/` | Physics core, deliverable pipeline, CLI, parity test |
+| `web/` | Static browser app, deployed to the live site |
+
+Everything in `out/` is reproducible from source — delete it and run `python engine/run.py`.
 
 The physics exists in two languages so the browser can recompute without a server.
 `parity_check.py` compares 3,840 values across the full option space and fails on any

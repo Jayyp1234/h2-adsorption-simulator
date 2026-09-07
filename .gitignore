@@ -3,12 +3,6 @@
 __pycache__/
 *.py[cod]
 
-# Generated deliverables — reproduce with `python engine/run.py`
-out/
-
-# Source specification documents (unpublished third-party thesis material)
-*.docx
-
 # Local tooling / OS
 .claude/
 .DS_Store
